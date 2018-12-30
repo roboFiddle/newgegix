@@ -2,6 +2,8 @@ cross
 cmake-build-debug
 isodir
 serial
+.idea
+
 *.o
 *.bin
 *.elf
