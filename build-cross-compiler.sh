@@ -6,11 +6,12 @@ GDB="gdb-8.2"
 
 CURRDIR=`pwd`
 PREFIX=$CURRDIR/cross
-WORKDIR=`mktemp -d`
+WORKDIR=$CURRDIR/cross-build
 
 echo "Installing cross-compiler to $PREFIX"
 echo "Building in directory $WORKDIR"
 
+mkdir $WORKDIR
 cd "$WORKDIR"
 
 # get and extract sources
@@ -36,7 +37,7 @@ fi
 # build and install libtools
 cd $BINUTILS
 ./configure --prefix="$PREFIX" --target=i686-elf --disable-nls --disable-werror --with-sysroot
-make -j 8 && make install
+make -j 4 && make install
 cd ..
 
 # download gcc prerequisites
@@ -48,13 +49,13 @@ cd ..
 mkdir $GCC-elf-objs
 cd $GCC-elf-objs
 ../$GCC/configure --prefix="$PREFIX" --target=i686-elf --disable-nls --enable-languages=c --without-headers
-make -j 8 all-gcc && make -j 8 all-target-libgcc && make install-gcc && make install-target-libgcc
+make -j 4 all-gcc && make -j 4 all-target-libgcc && make install-gcc && make install-target-libgcc
 cd ..
 
 # build and install GDB
 cd $GDB
 ./configure --prefix="$PREFIX" --target=i686-elf
-make -j 8 && make install
+make -j 4 && make install
 cd ..
 
 cd "$CURRDIR"
