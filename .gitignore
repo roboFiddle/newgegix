@@ -1,0 +1,5 @@
+cross/*
+*.o
+*.bin
+*.elf
+*.iso
