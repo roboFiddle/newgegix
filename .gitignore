@@ -1,4 +1,7 @@
-cross/*
+cross
+cmake-build-debug
+isodir
+serial
 *.o
 *.bin
 *.elf
