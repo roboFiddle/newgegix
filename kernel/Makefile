@@ -1,6 +1,6 @@
 include ../Makefile.config
 
-KERNEL_OBJECTS=boot/kernelmain.o support/string.o support/serial.o support/console.o main.o
+KERNEL_OBJECTS=boot/kernelmain.o support/string.o support/serial.o support/math.o support/console.o main.o
 
 basekernel.img: kernel
 	i686-elf-gcc -T linker.ld -o gegix.bin -ffreestanding -O2 -nostdlib ${KERNEL_OBJECTS} -lgcc
@@ -28,4 +28,4 @@ bootblock.elf: bootblock.o
 	${CC} ${KERNEL_CCFLAGS} -I ../include $< -o $@
 
 clean:
-	rm -rf basekernel.img *.o *.elf kernel bootblock bootblock.o boot/*.o support/*.o gegix.bin
+	rm -rf basekernel.img *.o *.elf kernel bootblock bootblock.o boot/*.o support/*.o gegix.bin *.iso

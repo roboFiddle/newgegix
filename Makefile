@@ -2,12 +2,12 @@ include Makefile.config
 
 KERNEL_SOURCES=$(wildcard kernel/*.[chS])
 
-do: clean	all	run
+do: clean all run
 
 all: basekernel.iso
 
 run: basekernel.iso
-	qemu-system-i386 -cdrom basekernel.iso -serial file:serial
+	qemu-system-i386 -serial file:serial -cdrom basekernel.iso -curses -s
 
 library/baselib.a: $(LIBRARY_SOURCES) $(LIBRARY_HEADERS)
 	cd library && make
@@ -24,5 +24,5 @@ image: kernel/basekernel.img
 basekernel.iso: image
 
 clean:
-	rm -rf basekernel.iso image isodir
+	rm -rf basekernel.iso image isodir serial
 	cd kernel && make clean
